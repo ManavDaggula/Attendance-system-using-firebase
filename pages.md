@@ -1,0 +1,11 @@
+- [ ] menu
+- [ ] welcome
+- [x] register
+- [ ] code display
+- [ ] success
+- [ ] admin
+- [ ] view participants
+- [ ] enter code
+- [ ] verify
+- [ ] verified
+- [ ] events

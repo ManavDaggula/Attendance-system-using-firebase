@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Jetbrains Mono', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -12,4 +13,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  /* Variables */
+  --background-color : #0D1E35;
+  --accent: #2D5DD8;
+  --accent-faded: #4663AF;
+  --primary-text: #ffffff;
+  --secondary-text: #A8A8A8;
+  --background-faded: rgba(255,255,255,0.18);
+}
+
+*{
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
 }
