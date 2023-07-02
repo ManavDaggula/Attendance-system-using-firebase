@@ -1,0 +1,15 @@
+.showCode{
+    display: grid;
+    gap: 4em;
+    margin-inline: 20%;
+}
+
+.showCode p{
+    text-align: center;
+}
+
+.code{
+    font-size: 2em;
+    text-align: center;
+    /* letter-spacing: 0.2em; */
+}

@@ -6,4 +6,8 @@ body{
   min-height: 100dvh;
 }
 #root{
+  position: relative;
+  /* display: grid; */
+  min-height: 100dvh;
+  z-index: 1;
 }

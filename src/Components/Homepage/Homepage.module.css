@@ -1,0 +1,17 @@
+.prompt{
+    text-align: center;
+}
+.prompt + button{
+    background-color: var(--accent);
+    border: hidden;
+    /* width: 50%; */
+    place-self: center;
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+}
+.welcome{
+    margin: 3em;
+    display: grid;
+    gap: 10em;
+    place-content: center;
+}

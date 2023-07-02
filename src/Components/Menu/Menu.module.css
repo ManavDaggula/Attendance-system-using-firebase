@@ -1,0 +1,44 @@
+.menu{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* top: 0px; */
+    /* z-index: 10; */
+}
+
+.menu svg{
+    fill: var(--primary-text);
+    width: 2em;
+    margin: 8px;
+    /* position: absolute; */
+    z-index: 2;
+}
+
+.menu .menuBackground {
+    position: absolute;
+    background-color: var(--background-faded);
+    min-height: 100dvh;
+    width: 25%;
+    left: 0%;
+    transition: left 1s ease;
+    backdrop-filter: blur(3px);
+}
+
+.menu button{
+    position: relative;
+    font-size: 1em;
+    top: 6em;
+    background-color: transparent;
+    border: hidden;
+    width: 100%;
+    /* letter-spacing: 0.2em; */
+}
+
+.menu[data-state="open"] .menuBackground {
+    left: 0%;
+}
+
+.menu[data-state="closed"] .menuBackground {
+    left: -30%;
+}

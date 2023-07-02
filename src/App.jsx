@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import AttendeeForm from './Components/AttendeeForm/AttendeeForm'
-import Header from './Components/Header/Header'
+import Logo from "./Components/Logo/Logo"
+import ShowCode from './Components/ShowCode/ShowCode'
+import Menu from './Components/Menu/Menu'
+import Homepage from './Components/Homepage/Homepage'
+import Background from './Components/Background/Background'
+import SuccessPage from './Components/SuccessPage/SuccessPage'
 
 function App() {
+  const [userState, setUserState] = useState('attendee')
   return (
     <>
-      <Header></Header>
-      <AttendeeForm></AttendeeForm>
+      <Logo />
+      <SuccessPage />
+      <Background />
     </>
   )
 }

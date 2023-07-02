@@ -1,8 +1,8 @@
-- [ ] menu
+- [x] menu
 - [ ] welcome
 - [x] register
-- [ ] code display
-- [ ] success
+- [x] code display
+- [x] success
 - [ ] admin
 - [ ] view participants
 - [ ] enter code
