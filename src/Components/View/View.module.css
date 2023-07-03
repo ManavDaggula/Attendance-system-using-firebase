@@ -1,0 +1,35 @@
+.viewAttendees {
+    /* margin: 2em; */
+    /* outline: 1px solid yellowgreen; */
+    display: grid;
+    place-content: center;
+    border-collapse: collapse;
+    margin-inline: 1em;
+}
+
+.viewAttendees thead{
+    /* padding-block: 1em; */
+    background-color: var(--background-faded);
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    /* padding: 1em; */
+}
+
+.viewAttendees tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    /* margin: 1em; */
+}
+
+.viewAttendees tbody tr, .viewAttendees thead tr{
+    display: grid;
+    place-content: center;
+    place-items: center;
+    grid-template-columns: 1fr 0.5fr 0.5fr 0.5fr 0.5fr 1fr;
+    gap: 1em;
+}
+.viewAttendees td {
+    text-align: center;
+}

@@ -1,0 +1,44 @@
+.adminMenu {
+    display: grid;
+    place-content: center;
+    gap: 3em;
+}
+
+.adminMenu .prompt{
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.adminMenu a {
+    background-color: var(--accent);
+    color: var(--primary-text);
+    text-decoration: none;
+    text-align: center;
+    border: hidden;
+    width: 50%;
+    place-self: center;
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+    /* transform: translateX(0vw); */
+}
+
+/* .adminMenu > a:nth-child(2){
+    animation: load 2s ease-in 0ms;
+}
+
+.adminMenu a:nth-child(3){
+    animation: load 2s ease-in 500ms;
+}
+
+.adminMenu a:nth-child(4){
+    animation: load 2s ease-in 1000ms;
+}
+
+@keyframes load{
+    0%{
+        transform: translateX(-100vw);
+    }
+    100%{
+        transform: translateX(0vw);
+    }
+} */

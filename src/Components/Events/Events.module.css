@@ -1,0 +1,74 @@
+.events {
+    display: grid;
+    place-content: center;
+    gap: 2em;
+}
+
+.prompt {
+    text-align: center;
+}
+
+.eventList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.event {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* height: 1.4em; */
+    transition: height 0.5s ease;
+    /* align-items: center; */
+}
+.event[data-state="open"] {
+    height: 3.4em;
+    /* scale: 1.2; */
+}
+.event[data-state="closed"] {
+    height: 1.4em;
+}
+
+.event > span {
+    text-align: center;
+    background-color: var(--accent-faded);
+    z-index: 1;
+    height: 1.4em;
+}
+
+.event > button {
+    background-color: var(--background-faded);
+    border: hidden;
+    height: 1.4em;
+    transition: transform 0.5s ease;
+    /* transform: translateY(-100%); */
+}
+
+.event[data-state="open"] > button {
+    transform: translateY(0%);
+}
+
+.event[data-state="closed"] > button {
+    transform: translateY(-100%);
+}
+
+.events input {
+    background-color: var(--background-faded);
+    border: hidden;
+    line-height: 2em;
+    border-radius: 1em;
+}
+
+.events > button {
+    background-color: var(--accent);
+    color: var(--primary-text);
+    text-decoration: none;
+    text-align: center;
+    border: hidden;
+    /* width: 50%; */
+    place-self: center;
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+}

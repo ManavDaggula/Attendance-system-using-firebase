@@ -23,6 +23,7 @@
     left: 0%;
     transition: left 1s ease;
     backdrop-filter: blur(3px);
+    z-index: 1;
 }
 
 .menu button{
@@ -31,6 +32,7 @@
     top: 6em;
     background-color: transparent;
     border: hidden;
+    margin-block: 1em;
     width: 100%;
     /* letter-spacing: 0.2em; */
 }

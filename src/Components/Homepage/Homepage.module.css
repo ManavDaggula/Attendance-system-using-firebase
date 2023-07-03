@@ -1,8 +1,10 @@
 .prompt{
     text-align: center;
 }
-.prompt + button{
+.prompt + a{
     background-color: var(--accent);
+    color: var(--primary-text);
+    text-decoration: none;
     border: hidden;
     /* width: 50%; */
     place-self: center;
