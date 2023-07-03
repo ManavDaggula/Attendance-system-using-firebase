@@ -1,6 +1,10 @@
 import React, { useState, useRef } from 'react'
 import styles from "./Verify.module.css"
+import { changeParticipantStatus, getParticipantForCode } from '../../Operations/operations'
+import { useNavigate } from 'react-router-dom'
 function Verify() {
+
+  const navigate = useNavigate()
 
     const [attendee, setAttendee] = useState()
     const promptRef = useRef(null)
@@ -15,20 +19,46 @@ function Verify() {
         sendPrompt("Invalid code")
         return false;
       }
-      promptRef.current.textContent = "verify details"
+      
       return true;
     }
 
     function getDetails() {
       if(validate()){
         // fetch attendee, if it exists set it using setAttendee
-        setAttendee({name:"Manav"})
+        getParticipantForCode(code)
+        .then(attendee=>{
+          setAttendee(attendee)
+          promptRef.current.textContent = "verify details"
+        })
+        .catch(e=>{
+          if(e.message=="No attendee found."){sendPrompt("No attendee found")}
+          else{
+            console.error(e)
+            sendPrompt("Error Occurred")
+          }
+        })
       }
+    }
+
+    function successfullAttendance() {
+      console.log(attendee.id)
+      changeParticipantStatus(attendee.id)
+      sendPrompt("Done 👍🏽")
+      setTimeout(()=>{
+        setAttendee(null)
+        setCode('')
+      },1500)
+      
     }
 
     function sendPrompt(message){
       promptRef.current.textContent = message
-      setTimeout(()=>{promptRef.current.textContent = "enter attendee code"},2000)
+      promptRef.current.style.transform = "scale(1.4)"
+      setTimeout(()=>{
+        promptRef.current.textContent = "enter attendee code";
+        promptRef.current.style.transform = "scale(1)"
+      },1500)
     }
 
   return (
@@ -43,8 +73,8 @@ function Verify() {
     :
         <>
         {/* <input type={styles.text} /> */}
-        <ShowDetails details={attendee}/>
-        <button onClick={()=>{promptRef.current.textContent = "Done 👍🏽"}}>verify</button>
+        <ShowDetails attendeeName={attendee.name} attendeeDept={attendee.dept} attendeeRoll={attendee.roll} attendeeDiv={attendee.div} attendeeYear={attendee.year} attendeeEvent={attendee.event}/>
+        <button onClick={successfullAttendance}>verify</button>
         </>
     }
     </div>
@@ -55,12 +85,12 @@ function Verify() {
 function ShowDetails(props) {
   return (
     <div className={styles.details}>
-        <span>name</span><span>Lorem, ipsum.</span>
-        <span>dept</span><span>Lorem, ipsum.</span>
-        <span>roll</span><span>Lorem, ipsum.</span>
-        <span>div</span><span>Lorem, ipsum.</span>
-        <span>year</span><span>Lorem, ipsum.</span>
-        <span>event</span><span>Lorem, ipsum.</span>
+        <span>name</span><span>{props.attendeeName}</span>
+        <span>dept</span><span>{props.attendeeDept}</span>
+        <span>roll</span><span>{props.attendeeRoll}</span>
+        <span>div</span><span>{props.attendeeDiv}</span>
+        <span>year</span><span>{props.attendeeYear}</span>
+        <span>event</span><span>{props.attendeeEvent}</span>
     </div>
   )
 }

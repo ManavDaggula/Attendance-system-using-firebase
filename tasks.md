@@ -13,13 +13,13 @@ pages
 
 validation
 - [x] form validation
-- [ ] attendee already exists
+- [x] attendee already exists
 - [x] code validation
-- [ ] attendee for code actually exists
+- [x] attendee for code actually exists
 
 db operations
-- [ ] get duplicate participant
-- [ ] add new participant
-- [ ] get participant for code
-- [ ] change status of participant
+- [x] get duplicate participant
+- [x] add new participant
+- [x] get participant for code
+- [x] change status of participant
 - [ ] read live participants with status attended

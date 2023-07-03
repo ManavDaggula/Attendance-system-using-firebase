@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from "./Form.module.css"
+import { addAttendee, getRunningEvents } from '../../Operations/operations'
 
 // name, dept, div, roll, year, event
 
@@ -13,6 +14,8 @@ function Form(props) {
   const [roll, setRoll] = useState('')
   const [year, setYear] = useState('')
   const [event, setEvent] = useState('')
+
+  const [eventList, setEventList] = useState([])
 
   function validateForm() {
     if(name=="" || dept=="" || div=="" || roll=="" || year=="" || event=="") {
@@ -30,19 +33,37 @@ function Form(props) {
   function submitForm() {
     if(validateForm()){
       // sendPrompt("details valid.")
-      props.setCode("abc")
+      // props.setCode("abc")
+      addAttendee(name, dept, div, roll, year, event)
+      .then((data)=>{
+        sendPrompt("your registration is recorded")
+        props.setCode(data.code)
+        props.setAttendeeDocRef(data.ref)
+      })
+      .catch((e)=>{
+        if(e.message=="Attendee already exists."){sendPrompt("record already exists")}
+      })
 
     }
   }
 
   function sendPrompt(message) {
     promptRef.current.textContent = message
-      setTimeout(()=>{promptRef.current.textContent = "Enter your details"},1000)
+    promptRef.current.style.transform = "scale(1.4)"
+
+      setTimeout(()=>{
+        promptRef.current.style.transform = "scale(1)"
+        promptRef.current.textContent = "Enter your details"
+      },1000)
   }
+
+  useEffect(()=>{
+    getRunningEvents().then((data)=>setEventList(data))
+  },[])
 
   return (
     <div className={styles.attendeeForm}>
-    <p className="prompt" ref={promptRef}>enter your details</p>
+    <p className={styles.prompt} ref={promptRef}>enter your details</p>
     <div className={styles.inputForm}>
       <label htmlFor="nameInput">name</label>
       <input type="text" id="nameInput" onChange={e=>setName(e.target.value.trim().toUpperCase())}/>
@@ -73,7 +94,8 @@ function Form(props) {
       <label htmlFor="eventInput">event</label>
       <select name="" id="eventInput" defaultValue={"none"} onChange={e=>setEvent(e.target.value.toUpperCase())}>
         <option value="none" disabled hidden>Select an option</option>
-        <option value="Jetpack Compose">Jetpack Compose</option>
+        {/* <option value="Jetpack Compose">Jetpack Compose</option> */}
+        {eventList.map((data,index)=><option key={index} value={data.name}>{data.name}</option>)}
       </select>
     </div>
     <button onClick={submitForm}>proceed</button>
