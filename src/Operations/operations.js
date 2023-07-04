@@ -26,11 +26,24 @@
 // }
 
 import { collection, addDoc, updateDoc, getDoc, serverTimestamp, getDocs, doc, setDoc, query, where, limit, connectFirestoreEmulator, onSnapshot } from "firebase/firestore";
-import {db} from "./firebase-config.js"
-connectFirestoreEmulator(db,"127.0.0.1","8080")
+import {db, auth} from "./firebase-config.js"
+import { connectAuthEmulator, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+connectFirestoreEmulator(db,"192.168.0.109","8080")
+connectAuthEmulator(auth, "http://192.168.0.109:9099")
 
 const attendeesRef = collection(db,'attendees')
 const eventsRef = collection(db,'events')
+
+async function trySignIn(email,pwd) {
+    let user;
+    try{
+        user = await signInWithEmailAndPassword(auth, email, pwd)
+    }
+    catch (e){
+        throw e;
+    }
+    return user
+}
 
 async function addEvent(name) {
     let newEvent = {name:name, status:"stopped"} // {start_time:[], end_time:[]} not working hence removed from document
@@ -83,7 +96,7 @@ async function stopEvent(id){
 
 async function generateCode(allowRepeat=true){
     let code_sample_space='ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    let newCode;
+    let newCode="";
     if(allowRepeat){
         for (let i=0;i<3;i++){
             newCode += code_sample_space.charAt(Math.floor(Math.random()*36))
@@ -118,7 +131,6 @@ async function addAttendee(name, dept, div, roll, year, event){
     return {'code':code,'ref':newAttendeeRef};
     
     // console.log(check.empty)
-    
 }
 
 async function getAttendees(){
@@ -156,4 +168,4 @@ function getAttendedListQuery() {
     return q;
 }
 
-export { addEvent, runEvent, stopEvent, getRunningEvents, getAllEvents, getAttendees, generateCode, addAttendee, getParticipantForCode, changeParticipantStatus, getAttendedListQuery }
+export { addEvent, runEvent, stopEvent, getRunningEvents, getAllEvents, getAttendees, generateCode, addAttendee, getParticipantForCode, changeParticipantStatus, getAttendedListQuery, trySignIn }

@@ -1,0 +1,37 @@
+.signin {
+    display: grid;
+    /* width: 50%; */
+    place-content: center;
+    place-items: center;
+    gap: 1.5em;
+}
+
+.prompt {
+    padding-inline: 1em;
+    transition: transform 0.5s ease;
+}
+
+.signin input {
+    background-color: var(--background-faded);
+    /* text-align: center; */
+    /* transform-origin: center; */
+    /* letter-spacing: 1em; */
+    border: hidden;
+    border-radius: 0.2em;
+    /* font-size: 1.4em; */
+    /* width: 6em; */
+    line-height: 2em;
+}
+
+.signin button {
+    background-color: var(--accent);
+    /* width: 50%; */
+    /* font-size: 1.4em; */
+    border: hidden;
+    border-radius: 0.2em;
+    padding: 0.5em 1em;
+}
+
+.signin button:hover{
+    box-shadow: 0px 0px 4px 4px var(--accent);
+}

@@ -38,11 +38,15 @@ function Menu(props) {
         /></svg>
         <div className={styles.menuBackground}>
           <button onClick={()=>{navigate("/");closeMenu();}}>Home</button>
-            {(props.status=='attendee')?
-            <button onClick={()=>{props.changeStatus('admin');closeMenu();navigate("/")}}>admin</button>
+            {(window.location.pathname!="/signin") ?
+            (props.status=='attendee') ?
+            <button onClick={()=>{closeMenu();navigate("/signin")}}>Log in</button>
             :
             <button onClick={()=>{props.changeStatus('attendee');closeMenu();navigate("/")}}>logout</button>
+            :
+            <></>
             }
+            
         </div>
     </section>
   )

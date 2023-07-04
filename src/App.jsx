@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter,
   Routes,
   Route,
   Link,
+  useNavigate,
 } from "react-router-dom";
 import './App.css'
 import Form from './Components/Form/Form'
@@ -18,9 +19,11 @@ import Admin from './Components/Admin/Admin';
 import Verify from './Components/Verify/Verify';
 import View from './Components/View/View';
 import Events from './Components/Events/Events';
+import SignIn from './Components/SignIn/SignIn';
 
 function App() {
   const [userState, setUserState] = useState('attendee')
+  // const navigate = useNavigate()
   return (
     <>
     <BrowserRouter>
@@ -30,13 +33,22 @@ function App() {
       
       <Route path='/' element={(userState!='admin')?<Homepage />:<Admin />}/>
       <Route path='/register' element={<AttendeeRegistration/>} />
-      {(userState=='admin') && <Route path="/events" element={<Events />} />}
+      <Route path='/signin' element={<SignIn changeStatus={(status)=>setUserState(status)}/>} />
+      {(userState=='admin') ? <Route path="/events" element={<Events />} /> : <Route path='/events' element={<RedirectTo to={"/"} />} />}
       {(userState=='admin') && <Route path="/verify" element={<Verify />} />}
       {(userState=='admin') && <Route path="/view" element={<View />} />}
       </Routes>
     </BrowserRouter>
     </>
   )
+}
+
+function RedirectTo(props){
+  const navigate = useNavigate()
+  useEffect(()=>{
+    navigate(props.to)
+  },[])
+  return(<></>)
 }
 
 export default App

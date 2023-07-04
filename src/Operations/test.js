@@ -1,4 +1,4 @@
-import { addAttendee, addEvent, generateCode, getAllEvents, getAttendees, getParticipantForCode, getRunningEvents, runEvent, stopEvent } from "./operations.js";
+import { addAttendee, addEvent, generateCode, getAllEvents, getAttendees, getParticipantForCode, getRunningEvents, runEvent, stopEvent, trySignIn } from "./operations.js";
 
 // addEvent("Web Dev")
 // addEvent("Cybersecurity")
@@ -6,9 +6,10 @@ import { addAttendee, addEvent, generateCode, getAllEvents, getAttendees, getPar
 // console.log("event added")
 // runEvent("8aoOYFBIAWycEVc1GP7v")
 // stopEvent("QBLUADdCbQynLPhc1v2N")
-// getRunningEvents().then((data)=>console.log(data))
+getRunningEvents().then((data)=>console.log(data))
 // console.log(await getAllEvents())
 // getAttendees().then(data=>console.log(data))
 // generateCode().then(code=>console.log(code))
 // addAttendee("nupoor","IT","C","606","TE","Cybersecurity").then(()=>console.log("added")).catch((e)=>console.log(e.message))
 // getParticipantForCode("X04").then((d)=>console.log(d)).catch((e)=>console.log(e.message))
+trySignIn("manavdaggula@gmail.com","ganu2002").then((user)=>{console.log("success")}).catch((e)=>{console.log("error")})

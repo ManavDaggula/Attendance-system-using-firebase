@@ -64,12 +64,13 @@ function Event(props) {
 
     async function start() {
         await runEvent(props.eventId)
+        setStatus("running")
         props.sendPrompt(`Running "${props.eventName}" event`)
-
     }
 
     async function end() {
         await stopEvent(props.eventId)
+        setStatus("stopped")
         props.sendPrompt(`Stopped "${props.eventName}" event`)
     }
 
