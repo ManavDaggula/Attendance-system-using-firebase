@@ -11,5 +11,4 @@ import { addAttendee, addEvent, generateCode, getAllEvents, getAttendees, getPar
 // getAttendees().then(data=>console.log(data))
 // generateCode().then(code=>console.log(code))
 // addAttendee("nupoor","IT","C","606","TE","Cybersecurity").then(()=>console.log("added")).catch((e)=>console.log(e.message))
-getParticipantForCode("X04").then((d)=>console.log(d)).catch((e)=>console.log(e.message))
-
+// getParticipantForCode("X04").then((d)=>console.log(d)).catch((e)=>console.log(e.message))

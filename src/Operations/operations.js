@@ -25,8 +25,9 @@
 //     end_time: datetime; ----not working
 // }
 
-import { collection, addDoc, updateDoc, getDoc, serverTimestamp, getDocs, doc, setDoc, query, where, limit } from "firebase/firestore";
+import { collection, addDoc, updateDoc, getDoc, serverTimestamp, getDocs, doc, setDoc, query, where, limit, connectFirestoreEmulator, onSnapshot } from "firebase/firestore";
 import {db} from "./firebase-config.js"
+connectFirestoreEmulator(db,"127.0.0.1","8080")
 
 const attendeesRef = collection(db,'attendees')
 const eventsRef = collection(db,'events')
@@ -80,19 +81,26 @@ async function stopEvent(id){
     console.log("event stopped")
 }
 
-async function generateCode(){
+async function generateCode(allowRepeat=true){
     let code_sample_space='ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     let newCode;
-    let codes = []
-    // fetch codes from db
-    let attendees = await getAttendees()
-    attendees.forEach(data=>codes.push(data.code))
-    do {
-        newCode='';
+    if(allowRepeat){
         for (let i=0;i<3;i++){
             newCode += code_sample_space.charAt(Math.floor(Math.random()*36))
         }
-    } while (newCode in codes);
+    }
+    else{
+        let codes = []
+        // fetch codes from db
+        let attendees = await getAttendees()
+        attendees.forEach(data=>codes.push(data.code))
+        do {
+            newCode='';
+            for (let i=0;i<3;i++){
+                newCode += code_sample_space.charAt(Math.floor(Math.random()*36))
+            }
+        } while (newCode in codes);
+    }
     return newCode;
 }
 
@@ -143,4 +151,9 @@ function changeParticipantStatus(id) {
     console.log("participant status changed")
 }
 
-export { addEvent, runEvent, stopEvent, getRunningEvents, getAllEvents, getAttendees, generateCode, addAttendee, getParticipantForCode, changeParticipantStatus }
+function getAttendedListQuery() {
+    let q = query(attendeesRef, where("code","==",""))
+    return q;
+}
+
+export { addEvent, runEvent, stopEvent, getRunningEvents, getAllEvents, getAttendees, generateCode, addAttendee, getParticipantForCode, changeParticipantStatus, getAttendedListQuery }

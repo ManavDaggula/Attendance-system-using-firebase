@@ -29,7 +29,7 @@
     /* scale: 1.2; */
 }
 .event[data-state="closed"] {
-    height: 1.4em;
+    height: 1.8em;
 }
 
 .event > span {
@@ -37,6 +37,8 @@
     background-color: var(--accent-faded);
     z-index: 1;
     height: 1.4em;
+    cursor: pointer;
+    padding-inline: 2em;
 }
 
 .event > button {
@@ -44,6 +46,7 @@
     border: hidden;
     height: 1.4em;
     transition: transform 0.5s ease;
+    cursor: pointer;
     /* transform: translateY(-100%); */
 }
 
