@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -24,6 +24,19 @@ import SignIn from './Components/SignIn/SignIn';
 function App() {
   const [userState, setUserState] = useState('attendee')
   // const navigate = useNavigate()
+
+  useEffect(()=>{
+    if(window.sessionStorage.getItem('user')){
+      setUserState('admin')
+    }
+  },[])
+  // useLayoutEffect(()=>{
+  //   console.log("checking session");
+  //   if(window.sessionStorage.getItem('user')){
+  //     setUserState('admin')
+  //   }
+  // },[])
+
   return (
     <>
     <BrowserRouter>
@@ -34,6 +47,9 @@ function App() {
       <Route path='/' element={(userState!='admin')?<Homepage />:<Admin />}/>
       <Route path='/register' element={<AttendeeRegistration/>} />
       <Route path='/signin' element={<SignIn changeStatus={(status)=>setUserState(status)}/>} />
+      {/* <Route path='/events' element={<Events userState={userState}/>} />
+      <Route path='/verify' element={<Verify  userState={userState}/>} />
+      <Route path='/view' element={<View  userState={userState}/>} /> */}
       {(userState=='admin') ? <Route path="/events" element={<Events />} /> : <Route path='/events' element={<RedirectTo to={"/"} />} />}
       {(userState=='admin') ? <Route path="/verify" element={<Verify />} /> : <Route path='/verify' element={<RedirectTo to={"/"} />} />}
       {(userState=='admin') ? <Route path="/view" element={<View />} /> : <Route path='/view' element={<RedirectTo to={"/"} />} />}
@@ -47,6 +63,7 @@ function App() {
 function RedirectTo(props){
   const navigate = useNavigate()
   useEffect(()=>{
+    console.log("renavigating to /")
     navigate(props.to)
   },[])
   return(<></>)

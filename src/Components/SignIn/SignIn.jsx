@@ -27,6 +27,7 @@ function SignIn(props) {
     trySignIn(email, password)
     .then((user)=>{
       console.log(user)
+      window.sessionStorage.setItem('user',JSON.stringify(user))
       props.changeStatus('admin')
       navigate("/")
 

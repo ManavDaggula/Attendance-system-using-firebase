@@ -42,7 +42,7 @@ function Menu(props) {
             (props.status=='attendee') ?
             <button onClick={()=>{closeMenu();navigate("/signin")}}>Log in</button>
             :
-            <button onClick={()=>{props.changeStatus('attendee');closeMenu();navigate("/")}}>logout</button>
+            <button onClick={()=>{window.sessionStorage.removeItem('user');props.changeStatus('attendee');closeMenu();navigate("/")}}>logout</button>
             :
             <></>
             }
