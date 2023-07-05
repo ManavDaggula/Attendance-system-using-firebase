@@ -13,7 +13,7 @@
 
 .signin input {
     background-color: var(--background-faded);
-    /* text-align: center; */
+    text-align: center;
     /* transform-origin: center; */
     /* letter-spacing: 1em; */
     border: hidden;
@@ -21,6 +21,7 @@
     /* font-size: 1.4em; */
     /* width: 6em; */
     line-height: 2em;
+    text-transform: none;
 }
 
 .signin button {

@@ -33,15 +33,18 @@ function Form(props) {
   function submitForm() {
     if(validateForm()){
       // sendPrompt("details valid.")
+      console.log("details are valid")
       // props.setCode("abc")
       addAttendee(name, dept, div, roll, year, event)
       .then((data)=>{
+        console.log(data)
         sendPrompt("your registration is recorded")
         props.setCode(data.code)
         props.setAttendeeDocRef(data.ref)
       })
       .catch((e)=>{
         if(e.message=="Attendee already exists."){sendPrompt("record already exists")}
+        console.error(e)
       })
 
     }

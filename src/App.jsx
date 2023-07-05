@@ -35,8 +35,9 @@ function App() {
       <Route path='/register' element={<AttendeeRegistration/>} />
       <Route path='/signin' element={<SignIn changeStatus={(status)=>setUserState(status)}/>} />
       {(userState=='admin') ? <Route path="/events" element={<Events />} /> : <Route path='/events' element={<RedirectTo to={"/"} />} />}
-      {(userState=='admin') && <Route path="/verify" element={<Verify />} />}
-      {(userState=='admin') && <Route path="/view" element={<View />} />}
+      {(userState=='admin') ? <Route path="/verify" element={<Verify />} /> : <Route path='/verify' element={<RedirectTo to={"/"} />} />}
+      {(userState=='admin') ? <Route path="/view" element={<View />} /> : <Route path='/view' element={<RedirectTo to={"/"} />} />}
+      <Route path='*' element={<RedirectTo to={"/"} />} />
       </Routes>
     </BrowserRouter>
     </>

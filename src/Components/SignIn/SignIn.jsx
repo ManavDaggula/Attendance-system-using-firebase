@@ -40,8 +40,8 @@ function SignIn(props) {
   return (
     <div className={styles.signin}>
       <p className={styles.prompt} ref={promptRef}>Enter Credentials</p>
-      <input type="text" onChange={(e)=>{setEmail(e.target.value)}}/>
-      <input type="password" onChange={(e)=>{setPassword(e.target.value)}}/>
+      <input type="text" onChange={(e)=>{setEmail(e.target.value)}} placeholder='username'/>
+      <input type="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder='password'/>
       <button onClick={signin}>Sign In</button>
     </div>
   )
