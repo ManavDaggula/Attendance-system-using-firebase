@@ -17,6 +17,8 @@ function ShowCode(props) {
       }
       else {
         console.log("done")
+        window.localStorage.removeItem('userCode')
+        window.localStorage.removeItem('userId')
         props.changeStatus()
         unsubscribe()
       }

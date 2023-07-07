@@ -28,8 +28,8 @@
 import { collection, addDoc, updateDoc, getDoc, serverTimestamp, getDocs, doc, setDoc, query, where, limit, connectFirestoreEmulator, onSnapshot } from "firebase/firestore";
 import {db, auth} from "./firebase-config.js"
 import { connectAuthEmulator, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// connectFirestoreEmulator(db,"192.168.0.109","8080")
-// connectAuthEmulator(auth, "http://192.168.0.109:9099")
+connectFirestoreEmulator(db,"localhost","8080")
+connectAuthEmulator(auth, "http://localhost:9099")
 
 const attendeesRef = collection(db,'attendees')
 const eventsRef = collection(db,'events')
@@ -126,7 +126,7 @@ async function addAttendee(name, dept, div, roll, year, event){
     else{
         code = await generateCode()
         newAttendeeRef = await addDoc(attendeesRef, {'name':name, 'dept':dept, 'div':div, 'roll':roll, 'year':year, 'event':event, 'code':code})
-        console.log("attendee added")
+        // console.log(newAttendeeRef)
     }
     return {'code':code,'ref':newAttendeeRef};
     
@@ -168,4 +168,9 @@ function getAttendedListQuery() {
     return q;
 }
 
-export { addEvent, runEvent, stopEvent, getRunningEvents, getAllEvents, getAttendees, generateCode, addAttendee, getParticipantForCode, changeParticipantStatus, getAttendedListQuery, trySignIn }
+async function getPrevAttendee(id){    
+    let docRef = await getDoc(doc(attendeesRef,id))
+    return docRef
+}
+
+export { addEvent, runEvent, stopEvent, getRunningEvents, getAllEvents, getAttendees, generateCode, addAttendee, getParticipantForCode, changeParticipantStatus, getAttendedListQuery, trySignIn, getPrevAttendee}

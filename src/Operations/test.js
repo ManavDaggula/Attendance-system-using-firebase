@@ -1,4 +1,5 @@
-import { addAttendee, addEvent, generateCode, getAllEvents, getAttendees, getParticipantForCode, getRunningEvents, runEvent, stopEvent, trySignIn } from "./operations.js";
+import { onSnapshot } from "firebase/firestore";
+import { addAttendee, addEvent, generateCode, getAllEvents, getAttendees, getParticipantForCode, getPrevAttendee, getRunningEvents, runEvent, stopEvent, trySignIn } from "./operations.js";
 
 // addEvent("Web Dev")
 // addEvent("Cybersecurity")
@@ -13,4 +14,13 @@ import { addAttendee, addEvent, generateCode, getAllEvents, getAttendees, getPar
 // addAttendee("nupoor","IT","C","606","TE","Cybersecurity").then(()=>console.log("added")).catch((e)=>console.log(e.message))
 // getParticipantForCode("X04").then((d)=>console.log(d)).catch((e)=>console.log(e.message))
 // trySignIn("manavdaggula@gmail.com","ganu2002").then((user)=>{console.log("success")}).catch((e)=>{console.log("error")})
-console.log(await generateCode())
+// console.log(await generateCode())
+getPrevAttendee('AzqEQEtbY7Kg5kiJCVNQ').then((doc)=>{
+    let unsubscribe = onSnapshot(doc.ref,(d)=>{
+        console.log(d.data())
+        setTimeout(()=>{
+            console.log("closing snapshot")
+            unsubscribe()
+        },2000)
+    })
+})

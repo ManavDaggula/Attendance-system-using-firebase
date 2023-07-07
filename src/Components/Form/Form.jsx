@@ -27,6 +27,13 @@ function Form(props) {
       sendPrompt("Enter valid details")
       return false}
 
+    if(window.localStorage.getItem('appearedEvents')){
+      if(JSON.parse(window.localStorage.getItem('appearedEvents')).includes(event)){
+        sendPrompt("Already registered for this event")
+        return false;
+      }
+    }
+
     return true;
   }
 
@@ -35,12 +42,22 @@ function Form(props) {
       // sendPrompt("details valid.")
       console.log("details are valid")
       // props.setCode("abc")
+      if(window.localStorage.getItem('appearedEvents')){
+        let appearedEvents = JSON.parse(window.localStorage.getItem('appearedEvents'))
+        appearedEvents.push(event)
+        window.localStorage.setItem('appearedEvents',appearedEvents)
+      }
+      else{
+        window.localStorage.setItem('appearedEvents',JSON.stringify([event]))
+      }
       addAttendee(name, dept, div, roll, year, event)
       .then((data)=>{
         console.log(data)
         sendPrompt("your registration is recorded")
         props.setCode(data.code)
+        window.localStorage.setItem('userCode',data.code)
         props.setAttendeeDocRef(data.ref)
+        window.localStorage.setItem('userId',data.ref.id)
       })
       .catch((e)=>{
         if(e.message=="Attendee already exists."){sendPrompt("record already exists")}

@@ -27,7 +27,7 @@ function Menu(props) {
     }
 
     useEffect(()=>{
-      console.log(menu.current)
+      // console.log(menu.current)
       menu.current.querySelector('svg').addEventListener("blur",closeMenu)
     },[])
 
