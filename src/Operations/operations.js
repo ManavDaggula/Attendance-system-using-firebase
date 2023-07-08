@@ -28,8 +28,8 @@
 import { collection, addDoc, updateDoc, getDoc, serverTimestamp, getDocs, doc, setDoc, query, where, limit, connectFirestoreEmulator, onSnapshot } from "firebase/firestore";
 import {db, auth} from "./firebase-config.js"
 import { connectAuthEmulator, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// connectFirestoreEmulator(db,"localhost","8080")
-// connectAuthEmulator(auth, "http://localhost:9099")
+connectFirestoreEmulator(db,"localhost","8080")
+connectAuthEmulator(auth, "http://localhost:9099")
 
 const attendeesRef = collection(db,'attendees')
 const eventsRef = collection(db,'events')
