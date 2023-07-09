@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState, Suspense, lazy } from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -7,19 +7,21 @@ import {
   useNavigate,
 } from "react-router-dom";
 import './App.css'
-import Form from './Components/Form/Form'
 import Logo from "./Components/Logo/Logo"
-import ShowCode from './Components/ShowCode/ShowCode'
 import Menu from './Components/Menu/Menu'
 import Homepage from './Components/Homepage/Homepage'
-import Background from './Components/Background/Background'
-import SuccessPage from './Components/SuccessPage/SuccessPage'
-import AttendeeRegistration from './Components/AttendeeRegistration/AttendeeRegistration'
-import Admin from './Components/Admin/Admin';
-import Verify from './Components/Verify/Verify';
-import View from './Components/View/View';
-import Events from './Components/Events/Events';
-import SignIn from './Components/SignIn/SignIn';
+// import AttendeeRegistration from './Components/AttendeeRegistration/AttendeeRegistration'
+const AttendeeRegistration = lazy(()=>import("./Components/AttendeeRegistration/AttendeeRegistration"))
+// import Admin from './Components/Admin/Admin';
+const Admin = lazy(()=>import("./Components/Admin/Admin"))
+// import Verify from './Components/Verify/Verify';
+const Verify = lazy(()=>import("./Components/Verify/Verify"))
+// import View from './Components/View/View';
+const View = lazy(()=>import("./Components/View/View"))
+// import Events from './Components/Events/Events';
+const Events = lazy(()=>import("./Components/Events/Events"))
+// import SignIn from './Components/SignIn/SignIn';
+const SignIn = lazy(()=>import("./Components/SignIn/SignIn"))
 
 function App() {
   const [userState, setUserState] = useState('attendee')
@@ -40,9 +42,11 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <Menu status={userState} changeStatus={(status)=>setUserState(status)}/>
-      <Logo />
+    <Menu status={userState} changeStatus={(status)=>setUserState(status)}/>
+    <Logo />
+    <Suspense fallback={<p>Loading...</p>}>
     <Routes>
+      
       
       <Route path='/' element={(userState!='admin')?<Homepage />:<Admin />}/>
       <Route path='/register' element={<AttendeeRegistration/>} />
@@ -55,6 +59,7 @@ function App() {
       {(userState=='admin') ? <Route path="/view" element={<View />} /> : <Route path='/view' element={<RedirectTo to={"/"} />} />}
       <Route path='*' element={<RedirectTo to={"/"} />} />
       </Routes>
+    </Suspense>
     </BrowserRouter>
     </>
   )
